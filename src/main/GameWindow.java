@@ -3,16 +3,17 @@ package main;
 import javax.swing.JFrame;
 
 public class GameWindow {
-    public static void main(String[] args) {
-        // define the attributes for the window
-        int boardWidth = 800;
-        int boardHeight = 800;
+    private JFrame jframe;
 
-        JFrame frame = new JFrame("Snake Game"); // create a new window
-        frame.setVisible(true); // make the frame visible
-        frame.setSize(boardWidth, boardHeight); // set the size of the frame
-        frame.setLocationRelativeTo(null); // set the window at the center of the screen
-        frame.setResizable(false); // make the window non-resizable
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // terminate the program when the window is closed
-}
+    public GameWindow(GamePanel gamePanel) {
+
+        jframe = new JFrame("Snake Game"); // create a new window
+
+        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // terminate the program when the window is closed
+        jframe.add(gamePanel);
+        jframe.setResizable(false); // make the window non-resizable
+        jframe.pack(); // set the window to the preferred size
+        jframe.setLocationRelativeTo(null); // set the window at the center of the screen
+        jframe.setVisible(true); // make the frame visible
+    }
 }

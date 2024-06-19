@@ -1,4 +1,4 @@
-# **_GUESSING GAME_**
+# **_BinarySearchTree_App_**
 _This is a mini project on Data Structures and Algorithms subjects at VNUHCM - International University_
 
 # **_How to run project_**

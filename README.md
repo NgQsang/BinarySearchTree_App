@@ -3,7 +3,7 @@ _This is a mini project on Data Structures and Algorithms subjects at VNUHCM - I
 
 <p>
 <div text-align="center">
-<img src="res\background_readme.png" alt="">
+<img src="res\images\background_readme.png" alt="">
 </div>
 </p>
 

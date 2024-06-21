@@ -1,6 +1,12 @@
 # **_BinarySearchTree_App_**
 _This is a mini project on Data Structures and Algorithms subjects at VNUHCM - International University_
 
+<p>
+<div text-align="center">
+<img src="res\images\background_readme.png" alt="">
+</div>
+</p>
+
 # **_How to run project_**
 
 1. **Step 1:** Clone the repository from GitHub.

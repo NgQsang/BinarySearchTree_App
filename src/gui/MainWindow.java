@@ -1,11 +1,11 @@
 package gui;
-
 import bst.BinarySearchTree;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class MainWindow extends JFrame {
 
@@ -30,6 +30,9 @@ public class MainWindow extends JFrame {
         JButton postOrderButton = new JButton("Post-Order Traversal");
         JButton minButton = new JButton("Find Smallest Node");
         JButton maxButton = new JButton("Find Largest Node");
+        JButton generateButton = new JButton("Generate Random BST");
+        JButton findNodeButton = new JButton("Find Node");
+        JButton exitButton = new JButton("Exit");
 
         buttonPanel.add(insertButton);
         buttonPanel.add(removeButton);
@@ -38,6 +41,9 @@ public class MainWindow extends JFrame {
         buttonPanel.add(postOrderButton);
         buttonPanel.add(minButton);
         buttonPanel.add(maxButton);
+        buttonPanel.add(generateButton);
+        buttonPanel.add(findNodeButton);
+        buttonPanel.add(exitButton);
 
         drawingPanel = new DrawingPanel(bst);
         JScrollPane scrollPane = new JScrollPane(drawingPanel);
@@ -115,13 +121,65 @@ public class MainWindow extends JFrame {
             }
         });
 
+        generateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generateRandomBinarySearchTree();
+            }
+        });
+
+        findNodeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                findNodeValue();
+            }
+        });
+
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(buttonPanel, BorderLayout.NORTH);
         getContentPane().add(scrollPane, BorderLayout.CENTER);
 
-        pack(); // Adjusts the size of the JFrame to fit its contents
-        setLocationRelativeTo(null); // Centers the JFrame on the screen
-        setVisible(true); // Set the JFrame to be visible
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    private void generateRandomBinarySearchTree() {
+        bst.clear(); // Clear existing tree
+
+        Random rand = new Random();
+        int nodeCount = rand.nextInt(10) + 1; // Random node count between 1 and 10
+
+        for (int i = 0; i < nodeCount; i++) {
+            int value = rand.nextInt(100) + 1; // Random value between 1 and 100
+            bst.insert(value); // Insert into BST
+        }
+
+        drawingPanel.repaint(); // Redraw the tree
+
+        JOptionPane.showMessageDialog(null, "Random Binary Search Tree Generated with " + nodeCount + " nodes.");
+    }
+
+    private void findNodeValue() {
+        String input = JOptionPane.showInputDialog("Enter the value to find:");
+        try {
+            int value = Integer.parseInt(input);
+            boolean found = bst.contains(value);
+            if (found) {
+                JOptionPane.showMessageDialog(null, "Value " + value + " exists in the tree.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Value " + value + " does not exist in the tree.");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid integer.");
+        }
     }
 
     public static void main(String[] args) {

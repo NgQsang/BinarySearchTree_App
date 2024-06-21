@@ -155,6 +155,10 @@ public class BinarySearchTree {
         return maxValue(root);
     }
 
+    public void clear() {
+        root = null;
+    }
+    
     public String printTree() {
         StringBuilder sb = new StringBuilder();
         printTree(root, 0, sb);

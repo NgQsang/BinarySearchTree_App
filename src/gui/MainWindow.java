@@ -30,7 +30,6 @@ public class MainWindow extends JFrame {
         JButton postOrderButton = new JButton("Post-Order Traversal");
         JButton minButton = new JButton("Find Smallest Node");
         JButton maxButton = new JButton("Find Largest Node");
-        JButton printTreeButton = new JButton("Print Tree");
 
         buttonPanel.add(insertButton);
         buttonPanel.add(removeButton);
@@ -39,7 +38,6 @@ public class MainWindow extends JFrame {
         buttonPanel.add(postOrderButton);
         buttonPanel.add(minButton);
         buttonPanel.add(maxButton);
-        buttonPanel.add(printTreeButton);
 
         drawingPanel = new DrawingPanel(bst);
         JScrollPane scrollPane = new JScrollPane(drawingPanel);
@@ -117,18 +115,10 @@ public class MainWindow extends JFrame {
             }
         });
 
-        printTreeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Tree Structure:\n" + bst.printTree());
-            }
-        });
-
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(buttonPanel, BorderLayout.NORTH);
         getContentPane().add(scrollPane, BorderLayout.CENTER);
 
-        // Additional modifications:
         pack(); // Adjusts the size of the JFrame to fit its contents
         setLocationRelativeTo(null); // Centers the JFrame on the screen
         setVisible(true); // Set the JFrame to be visible

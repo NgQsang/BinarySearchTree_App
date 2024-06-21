@@ -1,4 +1,3 @@
-// BinarySearchTree.java
 package bst;
 
 public class BinarySearchTree {
@@ -6,6 +5,10 @@ public class BinarySearchTree {
 
     public BinarySearchTree() {
         root = null;
+    }
+
+    public Node getRoot() {
+        return root;
     }
 
     public void insert(int data) {
@@ -22,10 +25,10 @@ public class BinarySearchTree {
             return root;
         }
 
-        if (data < root.data) {
-            root.left = insertRec(root.left, data);
-        } else if (data > root.data) {
-            root.right = insertRec(root.right, data);
+        if (data < root.getData()) {
+            root.setLeft(insertRec(root.getLeft(), data));
+        } else if (data > root.getData()) {
+            root.setRight(insertRec(root.getRight(), data));
         }
 
         return root;
@@ -40,35 +43,44 @@ public class BinarySearchTree {
             return root;
         }
 
-        if (data < root.data) {
-            root.left = removeRec(root.left, data);
-        } else if (data > root.data) {
-            root.right = removeRec(root.right, data);
+        if (data < root.getData()) {
+            root.setLeft(removeRec(root.getLeft(), data));
+        } else if (data > root.getData()) {
+            root.setRight(removeRec(root.getRight(), data));
         } else {
-            // Node with one child or no child
-            if (root.left == null) {
-                return root.right;
-            } else if (root.right == null) {
-                return root.left;
+            if (root.getLeft() == null) {
+                return root.getRight();
+            } else if (root.getRight() == null) {
+                return root.getLeft();
             }
 
-            // Node with two children
-            root.data = minValue(root.right);
-
-            // Delete the in-order successor
-            root.right = removeRec(root.right, root.data);
+            root.setData(minValue(root.getRight()));
+            root.setRight(removeRec(root.getRight(), root.getData()));
         }
 
         return root;
     }
 
     private int minValue(Node root) {
-        int minValue = root.data;
-        while (root.left != null) {
-            minValue = root.left.data;
-            root = root.left;
+        int minValue = root.getData();
+        while (root.getLeft() != null) {
+            root = root.getLeft();
+            minValue = root.getData();
         }
         return minValue;
+    }
+
+    private int maxValue(Node root) {
+        int maxValue = root.getData();
+        while (root.getRight() != null) {
+            root = root.getRight();
+            maxValue = root.getData();
+        }
+        return maxValue;
+    }
+
+    public boolean contains(int data) {
+        return contains(root, data);
     }
 
     private boolean contains(Node root, int data) {
@@ -76,64 +88,84 @@ public class BinarySearchTree {
             return false;
         }
 
-        if (data == root.data) {
+        if (data == root.getData()) {
             return true;
         }
 
-        if (data < root.data) {
-            return contains(root.left, data);
+        if (data < root.getData()) {
+            return contains(root.getLeft(), data);
         } else {
-            return contains(root.right, data);
+            return contains(root.getRight(), data);
         }
     }
 
-    public void inOrderTraversal() {
-        inOrderTraversal(root);
+    public String inOrderTraversal() {
+        StringBuilder sb = new StringBuilder();
+        inOrderTraversal(root, sb);
+        return sb.toString();
     }
 
-    private void inOrderTraversal(Node root) {
+    private void inOrderTraversal(Node root, StringBuilder sb) {
         if (root != null) {
-            inOrderTraversal(root.left);
-            System.out.print(root.data + " ");
-            inOrderTraversal(root.right);
+            inOrderTraversal(root.getLeft(), sb);
+            sb.append(root.getData()).append(" ");
+            inOrderTraversal(root.getRight(), sb);
         }
     }
 
-    public void printTree() {
-        printTree(root, 0);
+    public String preOrderTraversal() {
+        StringBuilder sb = new StringBuilder();
+        preOrderTraversal(root, sb);
+        return sb.toString();
     }
 
-    private void printTree(Node root, int level) {
+    private void preOrderTraversal(Node root, StringBuilder sb) {
         if (root != null) {
-            printTree(root.right, level + 1);
-            System.out.println("   ".repeat(level) + root.data);
-            printTree(root.left, level + 1);
+            sb.append(root.getData()).append(" ");
+            preOrderTraversal(root.getLeft(), sb);
+            preOrderTraversal(root.getRight(), sb);
         }
     }
 
-    public static void main(String[] args) {
-        BinarySearchTree bst = new BinarySearchTree();
-        bst.insert(50);
-        bst.insert(30);
-        bst.insert(20);
-        bst.insert(40);
-        bst.insert(70);
-        bst.insert(60);
-        bst.insert(80);
+    public String postOrderTraversal() {
+        StringBuilder sb = new StringBuilder();
+        postOrderTraversal(root, sb);
+        return sb.toString();
+    }
 
-        System.out.println("In-order traversal of the given tree");
-        bst.inOrderTraversal();
+    private void postOrderTraversal(Node root, StringBuilder sb) {
+        if (root != null) {
+            postOrderTraversal(root.getLeft(), sb);
+            postOrderTraversal(root.getRight(), sb);
+            sb.append(root.getData()).append(" ");
+        }
+    }
 
-        System.out.println("\n\nTree after removing 20");
-        bst.remove(20);
-        bst.inOrderTraversal();
+    public Integer findMinValue() {
+        if (root == null) {
+            return null;
+        }
+        return minValue(root);
+    }
 
-        System.out.println("\n\nTree after removing 30");
-        bst.remove(30);
-        bst.inOrderTraversal();
+    public Integer findMaxValue() {
+        if (root == null) {
+            return null;
+        }
+        return maxValue(root);
+    }
 
-        System.out.println("\n\nTree after removing 50");
-        bst.remove(50);
-        bst.inOrderTraversal();
+    public String printTree() {
+        StringBuilder sb = new StringBuilder();
+        printTree(root, 0, sb);
+        return sb.toString();
+    }
+
+    private void printTree(Node root, int level, StringBuilder sb) {
+        if (root != null) {
+            printTree(root.getRight(), level + 1, sb);
+            sb.append("   ".repeat(level)).append(root.getData()).append("\n");
+            printTree(root.getLeft(), level + 1, sb);
+        }
     }
 }

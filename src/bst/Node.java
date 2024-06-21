@@ -1,5 +1,17 @@
 package bst;
 
+/**
+ * Name: NGUYEN QUANG SANG
+ * Student ID: ITDSIU21113
+ * Team Member: 1 - individual 
+ * Short description of the program/exercise:
+ * This class represents a node in a Binary Search Tree (BST).
+ * Each node contains an integer value (data) and references to its
+ * left and right child nodes. It provides methods to get and set
+ * the data value, as well as access and modify the left and right
+ * child nodes.
+*/
+
 public class Node {
     private int data;
     private Node left;

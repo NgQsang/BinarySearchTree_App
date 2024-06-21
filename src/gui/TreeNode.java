@@ -1,5 +1,16 @@
 package gui;
 
+/**
+ * Name: NGUYEN QUANG SANG
+ * Student ID: ITDSIU21113
+ * Team Member: 1 - individual 
+ * Short description of the program/exercise:
+ * This class represents a graphical node in the visualization of a Binary Search Tree (BST).
+ * Each TreeNode object encapsulates data, coordinates for drawing on a graphical interface,
+ * and a state indicating whether it is highlighted. It provides methods to draw itself using
+ * Java's Graphics class, allowing for visual representation of BST nodes with optional highlighting.
+ */
+
 import java.awt.*;
 
 public class TreeNode {

@@ -1,5 +1,17 @@
 package bst;
 
+/**
+ * Name: NGUYEN QUANG SANG
+ * Student ID: ITDSIU21113
+ * Team Member: 1 - individual 
+ * Short description of the program/exercise:
+ * This class implements a Binary Search Tree (BST) data structure.
+ * It supports algorithms such as insertion, deletion, searching,
+ * finding minimum and maximum nodes, and various traversal algorithms
+ * (in-order, pre-order, post-order). The BST allows unique integer values only,
+ * preventing duplicates. It also provides functionality to clear the
+ * entire tree and print its structure.
+*/
 public class BinarySearchTree {
     private Node root;
 

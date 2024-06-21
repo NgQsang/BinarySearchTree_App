@@ -1,8 +1,19 @@
 package gui;
 
+/**
+ * Name: NGUYEN QUANG SANG
+ * Student ID: ITDSIU21113
+ * Team Member: 1 - individual 
+ * Short description of the program/exercise:
+ * This class represents the main window of a Binary Search Tree (BST) visualization application.
+ * It provides a graphical user interface (GUI) using Swing components to interact with a BST,
+ * allowing users to insert and remove nodes, perform traversals, find minimum and maximum nodes,
+ * generate random BSTs, find specific nodes, and exit the application. The visualization of the BST
+ * is displayed using a DrawingPanel, where nodes are drawn and can be highlighted based on user actions.
+ */
+
 import bst.BinarySearchTree;
 import bst.Node;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -179,7 +190,7 @@ public class MainWindow extends JFrame {
 
         JOptionPane.showMessageDialog(null, "Random Binary Search Tree Generated with " + nodeCount + " nodes.");
     }
-    
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

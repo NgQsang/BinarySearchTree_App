@@ -1,8 +1,19 @@
 package gui;
 
+/**
+ * Name: NGUYEN QUANG SANG
+ * Student ID: ITDSIU21113
+ * Team Member: 1 - individual 
+ * Short description of the program/exercise:
+ * This class represents a panel for drawing a Binary Search Tree (BST).
+ * It extends JPanel and provides functionality to visually represent
+ * the BST structure using graphics. Nodes of the BST are represented as
+ * TreeNode objects, and the panel supports highlighting a specific node
+ * based on user interaction or program logic.
+ */
+
 import bst.BinarySearchTree;
 import bst.Node;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;

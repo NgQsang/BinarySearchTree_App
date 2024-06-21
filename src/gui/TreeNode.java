@@ -15,7 +15,7 @@ import java.awt.*;
 
 public class TreeNode {
 
-    private static final int DIAMETER = 30;
+    private static final int DIAMETER = 50;
     private int data;
     private int x, y;
     private boolean highlighted;

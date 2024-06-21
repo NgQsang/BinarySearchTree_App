@@ -137,7 +137,11 @@ public class MainWindow extends JFrame {
         generateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                long startTime = System.nanoTime(); // Start timing
                 generateRandomBinarySearchTree();
+                long endTime = System.nanoTime(); // End timing
+                long elapsedTime = endTime - startTime;
+                JOptionPane.showMessageDialog(null, "Random Binary Search Tree Generated.\nTime elapsed: " + elapsedTime + " nanoseconds.");
             }
         });
 
@@ -187,8 +191,6 @@ public class MainWindow extends JFrame {
         }
 
         drawingPanel.repaint(); // Redraw the tree
-
-        JOptionPane.showMessageDialog(null, "Random Binary Search Tree Generated with " + nodeCount + " nodes.");
     }
 
     public static void main(String[] args) {

@@ -172,4 +172,40 @@ public class BinarySearchTree {
             printTree(root.getLeft(), level + 1, sb);
         }
     }
+
+    public Node findMinNode() {
+        return findMinNodeRec(root);
+    }
+
+    private Node findMinNodeRec(Node root) {
+        if (root == null || root.getLeft() == null) {
+            return root;
+        }
+        return findMinNodeRec(root.getLeft());
+    }
+
+    public Node findMaxNode() {
+        return findMaxNodeRec(root);
+    }
+
+    private Node findMaxNodeRec(Node root) {
+        if (root == null || root.getRight() == null) {
+            return root;
+        }
+        return findMaxNodeRec(root.getRight());
+    }
+
+    public Node search(int data) {
+        return searchRec(root, data);
+    }
+
+    private Node searchRec(Node root, int data) {
+        if (root == null || root.getData() == data) {
+            return root;
+        }
+        if (data < root.getData()) {
+            return searchRec(root.getLeft(), data);
+        }
+        return searchRec(root.getRight(), data);
+    }
 }

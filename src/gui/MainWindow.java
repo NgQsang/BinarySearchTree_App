@@ -1,6 +1,7 @@
 package gui;
 
 import bst.BinarySearchTree;
+import bst.Node;
 
 import javax.swing.*;
 import java.awt.*;
@@ -101,9 +102,9 @@ public class MainWindow extends JFrame {
         minButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Integer minValue = bst.findMinValue();
-                if (minValue != null) {
-                    JOptionPane.showMessageDialog(null, "Smallest Node:\n" + minValue);
+                Node minNode = bst.findMinNode();
+                if (minNode != null) {
+                    drawingPanel.highlightNode(minNode);
                 } else {
                     JOptionPane.showMessageDialog(null, "Tree is empty.");
                 }
@@ -113,9 +114,9 @@ public class MainWindow extends JFrame {
         maxButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Integer maxValue = bst.findMaxValue();
-                if (maxValue != null) {
-                    JOptionPane.showMessageDialog(null, "Largest Node:\n" + maxValue);
+                Node maxNode = bst.findMaxNode();
+                if (maxNode != null) {
+                    drawingPanel.highlightNode(maxNode);
                 } else {
                     JOptionPane.showMessageDialog(null, "Tree is empty.");
                 }
@@ -132,7 +133,18 @@ public class MainWindow extends JFrame {
         findNodeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                findNodeValue();
+                String input = JOptionPane.showInputDialog("Enter the value to find:");
+                try {
+                    int value = Integer.parseInt(input);
+                    Node foundNode = bst.search(value);
+                    if (foundNode != null) {
+                        drawingPanel.highlightNode(foundNode);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Value " + value + " does not exist in the tree.");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid integer.");
+                }
             }
         });
 
@@ -152,7 +164,7 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
 
-    private void generateRandomBinarySearchTree() {
+     private void generateRandomBinarySearchTree() {
         bst.clear(); // Clear existing tree
 
         Random rand = new Random();
@@ -167,22 +179,7 @@ public class MainWindow extends JFrame {
 
         JOptionPane.showMessageDialog(null, "Random Binary Search Tree Generated with " + nodeCount + " nodes.");
     }
-
-    private void findNodeValue() {
-        String input = JOptionPane.showInputDialog("Enter the value to find:");
-        try {
-            int value = Integer.parseInt(input);
-            boolean found = bst.contains(value);
-            if (found) {
-                JOptionPane.showMessageDialog(null, "Value " + value + " exists in the tree.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Value " + value + " does not exist in the tree.");
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid integer.");
-        }
-    }
-
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

@@ -12,11 +12,13 @@ public class DrawingPanel extends JPanel {
 
     private BinarySearchTree bst;
     private Map<Integer, TreeNode> nodes;
+    private TreeNode highlightedNode;
 
     public DrawingPanel(BinarySearchTree bst) {
         this.bst = bst;
         this.nodes = new HashMap<>();
-        setPreferredSize(new Dimension(800, 600)); // Set panel size as needed
+        this.highlightedNode = null;
+        setPreferredSize(new Dimension(800, 600));
     }
 
     @Override
@@ -25,10 +27,7 @@ public class DrawingPanel extends JPanel {
 
         Node root = bst.getRoot();
         if (root != null) {
-            // Clear previous nodes and lines
             nodes.clear();
-
-            // Draw the tree recursively starting from the root
             int startX = getWidth() / 2;
             int startY = 50;
             drawTree(g, root, startX, startY);
@@ -37,31 +36,43 @@ public class DrawingPanel extends JPanel {
 
     private void drawTree(Graphics g, Node root, int x, int y) {
         if (root != null) {
-            // Draw current node
             TreeNode treeNode = new TreeNode(root.getData(), x, y);
             nodes.put(root.getData(), treeNode);
+
+            if (highlightedNode != null && root.getData() == highlightedNode.getData()) {
+                treeNode.setHighlighted(true);
+            } else {
+                treeNode.setHighlighted(false);
+            }
+
             treeNode.draw(g);
 
-            // Set edge color to black
             g.setColor(Color.BLACK);
-
-            // Recursively draw left and right children
             if (root.getLeft() != null) {
-                int leftX = x - 100; // Adjust x position for left child
-                int leftY = y + 100; // Adjust y position for left child
+                int leftX = x - 100;
+                int leftY = y + 100;
                 drawTree(g, root.getLeft(), leftX, leftY);
-
-                // Draw line to left child
                 g.drawLine(x, y, leftX, leftY);
             }
             if (root.getRight() != null) {
-                int rightX = x + 100; // Adjust x position for right child
-                int rightY = y + 100; // Adjust y position for right child
+                int rightX = x + 100;
+                int rightY = y + 100;
                 drawTree(g, root.getRight(), rightX, rightY);
-
-                // Draw line to right child
                 g.drawLine(x, y, rightX, rightY);
             }
         }
+    }
+
+    public void highlightNode(Node node) {
+        if (highlightedNode != null) {
+            highlightedNode.setHighlighted(false);
+        }
+        if (node != null) {
+            highlightedNode = nodes.get(node.getData());
+            if (highlightedNode != null) {
+                highlightedNode.setHighlighted(true);
+            }
+        }
+        repaint();
     }
 }

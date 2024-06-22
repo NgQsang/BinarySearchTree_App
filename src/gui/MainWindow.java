@@ -180,17 +180,17 @@ public class MainWindow extends JFrame {
     }
 
      private void generateRandomBinarySearchTree() {
-        bst.clear(); // Clear existing tree
+        bst.clear(); // O(1) or O(n) depending on implementation
 
         Random rand = new Random();
-        int nodeCount = rand.nextInt(10) + 1; // Random node count between 1 and 10
+        int nodeCount = rand.nextInt(10) + 1; // O(1) - Random node count between 1 and 10
 
         for (int i = 0; i < nodeCount; i++) {
-            int value = rand.nextInt(100) + 1; // Random value between 1 and 100
-            bst.insert(value); // Insert into BST
+            int value = rand.nextInt(100) + 1; // O(1) - Random value between 1 and 100
+            bst.insert(value); // O(h) - Insert into BST, where h is the height of the tree
         }
 
-        drawingPanel.repaint(); // Redraw the tree
+        drawingPanel.repaint(); // O(1) - Redraw the tree
     }
 
     public static void main(String[] args) {

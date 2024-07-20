@@ -9,7 +9,7 @@ package bst;
  * Each node contains an integer value (data) and references to its
  * left and right child nodes. It provides methods to get and set
  * the data value, as well as access and modify the left and right
- * child nodes.
+ * child nodes
 */
 
 public class Node {
